@@ -17,9 +17,9 @@ Instruções detalhadas para levantar a infraestrutura, executar e visualizar o 
 
 ## Equipe:
 
-Beatriz Carla Pereira
-Hugo Alcantara da Rocha
-Manuela Cavalcanti
-Maria Fernanda Ordonho
-Rafaela Brasileiro Vidal
-Ygor Rosa
+1. Beatriz Carla Pereira
+2. Hugo Alcantara da Rocha
+3. Manuela Cavalcanti
+4. Maria Fernanda Ordonho
+5. Rafaela Brasileiro Vidal
+6. Ygor Rosa
