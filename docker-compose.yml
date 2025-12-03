@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+  # 1. Banco de Dados Estruturado (PostgreSQL)
+  db:
+    image: postgres:13
+    container_name: weather_postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - weather-network
+
+  # 2. Armazenamento de Objetos (MinIO/S3)
+  minio:
+    image: minio/minio
+    container_name: weather_minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000" # API S3
+      - "9001:9001" # Console Web
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - minio_data:/data
+    networks:
+      - weather-network
+
+  # 3. MLFlow (Registro de Modelos)
+  mlflow:
+    build: ./mlflow
+    container_name: weather_mlflow
+    ports:
+      - "5050:5000"
+    environment:
+      MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+    command: >
+      mlflow server 
+      --backend-store-uri postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      --default-artifact-root s3://mlflow/
+      --host 0.0.0.0
+    depends_on:
+      - db
+      - minio
+    networks:
+      - weather-network
+
+  # 4. ThingsBoard (Visualização e Broker MQTT/HTTP)
+  thingsboard:
+    image: thingsboard/tb-postgres
+    container_name: weather_thingsboard
+    ports:
+      - "9090:9090" # Porta Web (alterado de 8080 para evitar conflitos comuns)
+      - "1883:1883" # MQTT
+      - "5683:5683" # CoAP
+    environment:
+      TB_QUEUE_TYPE: in-memory
+    volumes:
+      - tb_data:/data
+      - tb_log:/var/log/thingsboard
+    networks:
+      - weather-network
+
+  # 5. Jupyter Notebook (Análise)
+  jupyter:
+    build: ./jupyter
+    container_name: weather_jupyter
+    ports:
+      - "8888:8888"
+    environment:
+      JUPYTER_TOKEN: cesar123 # Senha simples para acesso rápido
+      MLFLOW_TRACKING_URI: http://mlflow:5000
+      MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+      AWS_ACCESS_KEY_ID: ${MINIO_ROOT_USER}
+      AWS_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./notebooks:/home/jovyan/work
+    networks:
+      - weather-network
+
+  # 6. FastAPI (Ingestão e Cópia)
+  fastapi:
+    build: ./fastapi
+    container_name: weather_fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
+      S3_ENDPOINT: http://minio:9000
+      AWS_ACCESS_KEY: ${MINIO_ROOT_USER}
+      AWS_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+    depends_on:
+      - db
+      - minio
+    networks:
+      - weather-network
+
+volumes:
+  postgres_data:
+  minio_data:
+  tb_data:
+  tb_log:
+
+networks:
+  weather-network:
+    driver: bridge
