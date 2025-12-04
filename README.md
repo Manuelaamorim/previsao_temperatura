@@ -35,13 +35,16 @@ A solução segue o fluxo:
 - Um script envia previsões contínuas para o ThingsBoard, atualizando o dashboard
 
 Serviços orquestrados pelo docker-compose:
-Serviço	     Porta	        Finalidade
-PostgreSQL	  5432	      Banco de dados
-MinIO	      9000/9001	    Armazenamento S3
-MLflow	      5050	   Versionamento de modelo
-Jupyter	      8888	    Análise e treinamento
-FastAPI	      8000	    Ingestão e predição
-ThingsBoard	  9090	   Dashboard em tempo real
+
+| Serviço      | Porta(s)     | Finalidade                     |
+|--------------|--------------|--------------------------------|
+| PostgreSQL   | 5432         | Banco de dados                 |
+| MinIO        | 9000 / 9001  | Armazenamento S3               |
+| MLflow       | 5050         | Versionamento de modelo        |
+| Jupyter      | 8888         | Análise e treinamento          |
+| FastAPI      | 8000         | Ingestão e predição            |
+| ThingsBoard  | 9090         | Dashboard em tempo real        |
+
 
 ## 3. Como Executar o Pipeline
 
@@ -107,12 +110,15 @@ Login: tenant@thingsboard.org
 Senha: tenant
 
 ## 4. Resumo das URLs
-Serviço	      URL	                         Credenciais
-Jupyter	      http://localhost:8888        Token: cesar123
-MLflow	      http://localhost:5050        –
-FastAPI Docs	http://localhost:8000/docs   –
-MinIO Console	http://localhost:9001        minioadmin / minioadmin
-ThingsBoard	  http://localhost:9090        tenant@thingsboard.org / tenant
+
+| Serviço        | URL                       | Credenciais                        |
+|----------------|---------------------------|------------------------------------|
+| Jupyter        | http://localhost:8888     | Token: `cesar123`                  |
+| MLflow         | http://localhost:5050     | -                                  |
+| FastAPI Docs   | http://localhost:8000/docs| -                                  |
+| MinIO Console  | http://localhost:9001     | `minioadmin` / `minioadmin`        |
+| ThingsBoard    | http://localhost:9090     | `tenant@thingsboard.org` / `tenant`|
+
 
 ## Equipe / Github:
 
