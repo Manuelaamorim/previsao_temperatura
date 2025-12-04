@@ -86,7 +86,7 @@ services:
     networks:
       - weather-network
 
-  # 6. FastAPI (Ingestão e Cópia)
+  # 6. FastAPI (Ingestão e Previsão)
   fastapi:
     build: ./fastapi
     container_name: weather_fastapi
@@ -97,6 +97,8 @@ services:
       S3_ENDPOINT: http://minio:9000
       AWS_ACCESS_KEY: ${MINIO_ROOT_USER}
       AWS_SECRET_KEY: ${MINIO_ROOT_PASSWORD}
+    volumes:
+      - ./notebooks/data:/app/models  # Monta a pasta de dados para acesso ao modelo
     depends_on:
       - db
       - minio

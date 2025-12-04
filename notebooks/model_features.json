@@ -1,0 +1,46 @@
+{
+  "features": [
+    "Temp_lag_1",
+    "Umi_lag_1",
+    "Vento_lag_1",
+    "Rad_lag_1",
+    "Temp_lag_2",
+    "Umi_lag_2",
+    "Vento_lag_2",
+    "Rad_lag_2",
+    "Temp_lag_3",
+    "Umi_lag_3",
+    "Vento_lag_3",
+    "Rad_lag_3",
+    "Temp_lag_6",
+    "Umi_lag_6",
+    "Vento_lag_6",
+    "Rad_lag_6",
+    "Temp_lag_12",
+    "Umi_lag_12",
+    "Vento_lag_12",
+    "Rad_lag_12",
+    "Temp_lag_24",
+    "Umi_lag_24",
+    "Vento_lag_24",
+    "Rad_lag_24",
+    "hour_sin",
+    "hour_cos"
+  ],
+  "lags": [
+    1,
+    2,
+    3,
+    6,
+    12,
+    24
+  ],
+  "best_params": {
+    "n_estimators": 500,
+    "min_samples_split": 5,
+    "min_samples_leaf": 1,
+    "max_features": "sqrt",
+    "max_depth": 10,
+    "bootstrap": false
+  }
+}
