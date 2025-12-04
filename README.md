@@ -49,17 +49,17 @@ Serviços orquestrados pelo docker-compose:
 ## 3. Como Executar o Pipeline
 
 ### ETAPA 1 — Clonar o Repositório
-git clone https://github.com/Manuelaamorim/previsao_temperatura.git
+git clone https://github.com/Manuelaamorim/previsao_temperatura.git  
 cd previsao_temperatura
 
-### ETAPA 2 — Subir a Infraestrutura Docker
-docker-compose up -d --build
+### ETAPA 2 — Subir a Infraestrutura Docker  
+docker-compose up -d --build  
 
-Aguarde 2 a 3 minutos
+Aguarde 2 a 3 minutos  
 
-Verifique:
-docker ps
-Você deve encontrar 6 containers rodando
+Verifique:  
+docker ps  
+Você deve encontrar 6 containers rodando  
 
 ### ETAPA 3 — Popular o Banco de Dados
 Rodar o simulador por ~5 minutos:
