@@ -123,7 +123,7 @@ Senha: tenant
 ## Equipe / Github:
 
 1. Beatriz Carla Pereira - biapereira2
-2. Hugo Alcantara da Rocha - 
+2. Hugo Alcantara da Rocha - Hugorocha05
 3. Manuela Cavalcanti - Manuelaamorim
 4. Maria Fernanda Ordonho - nandaord
 5. Rafaela Brasileiro Vidal - Rafabvidal
