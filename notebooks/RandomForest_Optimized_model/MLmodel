@@ -15,8 +15,8 @@ flavors:
 is_signature_from_type_hint: false
 mlflow_version: 3.6.0
 model_id: null
-model_size_bytes: 11240038
-model_uuid: 4dad53877c774bedab87229fbafb44dc
+model_size_bytes: 2038246
+model_uuid: 9ced66b084df4bd5b0865550f4d43aaa
 prompts: null
 signature:
   inputs: '[{"type": "double", "name": "Temp_lag_1", "required": true}, {"type": "double",
@@ -42,4 +42,4 @@ signature:
   outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "float64", "shape": [-1]}}]'
   params: null
 type_hint_from_example: false
-utc_time_created: '2025-12-04 03:20:05.137330'
+utc_time_created: '2025-12-04 10:52:20.951320'
